@@ -16,13 +16,13 @@ A simple Python expense tracking tool using FastMCP. It stores and manages expen
 
 ## Usage
 
-### Running the Application
+### Add Server into Claude Desktop
 
 Start the server with:
 ```bash
-python main.py
+uv run fastmcp install claude-desktop main.py
 ```
-This will run FastMCP and expose the defined tools and resources.
+This will run FastMCP and expose the defined tools and resources into claude desktop
 
 ---
 
