@@ -1,0 +1,22 @@
+{
+  "food": 6000,
+  "transport": 2500,
+  "housing": 12000,
+  "utilities": 4000,
+  "health": 3000,
+  "education": 2500,
+  "family_kids": 4000,
+  "entertainment": 2000,
+  "shopping": 3500,
+  "subscriptions": 1500,
+  "personal_care": 2000,
+  "gifts_donations": 1500,
+  "finance_fees": 1000,
+  "business": 5000,
+  "travel": 6000,
+  "home": 2500,
+  "pet": 1500,
+  "taxes": 8000,
+  "investments": 7000,
+  "misc": 1000
+}
