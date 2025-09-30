@@ -11,8 +11,8 @@ A simple Python expense tracking tool using FastMCP. It stores and manages expen
    pip install fastmcp
    ```
 
-3. **Prepare category data (optional):**
-   - Place a `categories.json` file in the project directory for expense categories.
+3. **Prepare category data and budget:**
+   - Place a `categories.json` and `budget.json` file in the project directory for expense categories.
 
 ## Usage
 
@@ -54,42 +54,97 @@ Add a new expense entry.
 }
 ```
 
-### 3. List Expenses
 
-Lists expense entries between two dates.
+---
+
+### 3. List Expenses
+List expense entries within an inclusive date range.
 
 **Parameters:**
-- `startdate` (string, required): Start of date range (`"YYYY-MM-DD"`)
-- `enddate` (string, required): End of date range (`"YYYY-MM-DD"`)
+- `start_date` (string, required): `"YYYY-MM-DD"`
+- `end_date` (string, required): `"YYYY-MM-DD"`
+
+---
 
 ### 4. Summarize Expenses
-
-Summarizes expenses by category within a date range.
+Summarize expenses by category or overall within a date range.
 
 **Parameters:**
-- `startdate` (string, required): Start of range
-- `enddate` (string, required): End of range
-- `category` (string, optional): Filter by specific category
+- `start_date` (string, required)
+- `end_date` (string, required)
+- `category` (optional): Filter to a single category
 
-### 5. Get Categories
+---
 
-Returns the list of expense categories.
+### 5. Delete Expense
+Delete an expense entry by ID.
+
+**Parameters:**
+- `expense_id` (integer, required)
+
+---
+
+### 6. Update Expense
+Update one or more fields of an expense entry.
+
+**Parameters:**
+- `expense_id` (integer, required)
+- `date` (string, optional)
+- `amount` (float, optional)
+- `category` (string, optional)
+- `subcategory` (string, optional)
+- `note` (string, optional)
+
+---
+
+### 7. Get Categories
+Fetch available categories.
 
 - `GET /resource/expensecategories`
 - Returns the contents of `categories.json`.
 
 ---
 
+### 8. Total Budget
+Get the total monthly budget (sum of all categories from `budget.json`).
+
+**Return:**  
+{
+"total_budget": 850
+}
+
+---
+### 9. Category Budget Usage
+Check budget usage for a specific category in a given date range.
+
+**Parameters:**
+- `category` (string, required)
+- `start_date` (string, required)
+- `end_date` (string, required)
+
+**Return Example:**
+{
+"category": "Food",
+"budget_limit": 500,
+"spent": 120.0,
+"remaining": 380.0
+}
+
+
+---
+
 ## Data Storage
 
-- Expenses are saved in `expenses.db` (SQLite).
+- Expenses are stored in `expenses.db` (SQLite).
 - Categories are loaded from `categories.json`.
+- Budgets are loaded from `budget.json`.
 
 ---
 
 ## Notes
 
-- All commands are exposed as FastMCP tools and can be called via the MCP Inspector or API client.
-- Make sure to always provide required fields, especially `category`, for input validation.
+- All commands are exposed as FastMCP tools.
+- You can inspect and call them with the **MCP Inspector** or any API client.
+- Database changes (insert/update/delete) take effect instantly.
+- Category and budget JSON files are re-read on each access so you can edit them without restarting the server.
 
----
